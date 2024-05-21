@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+
+{% block register %}
+<section class="login-form">
+    <div class="wrapper">
+        <form action="{% url 'register_user' %}" method="post">
+            {% csrf_token %}
+            <h1>ĐĂNG KÝ</h1>
+            <div class="input">
+                <input type="text" placeholder="Tên Đăng Nhập" name="username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input">
+                <input type="text" placeholder="Email" name="email" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input">
+                <input type="password" placeholder="Mật Khẩu" name="password1" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input">
+                <input type="password" placeholder="Mật Khẩu" name="password2" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="button">Đăng Ký</button>
+        </form>
+    </div>
+</section>
+{% endblock register %}

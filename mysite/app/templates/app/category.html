@@ -1,0 +1,128 @@
+{% extends 'app/base.html' %}
+
+{% block category %}
+
+<!-- Begin Categories Content -->
+<div class="container" style="padding-top: 130px;">
+    <div class="row">
+        <!-- Begin Left Menu -->
+        <div class="col-2" style="  padding: auto; margin-top: 50px;">
+
+        </div>
+        <!-- End Left Menu -->
+
+        <!-- Begin Main Content -->
+
+        <h4>{{theloai.ten}}</h4>
+        <p>
+            Tổng số sản phẩm: {{sanpham_list|length}}
+        </p>
+        <hr>
+        <!-- Begin Filter -->
+        <div>
+            <form action="" method="get">
+                <label for="sort-by">Sắp xếp theo</label>
+                <select name="sort-by" id="sort-by">
+                    <option value="all">Tất cả sản phẩm</option>
+                    <option value="tang">Giá: Tăng dần</option>
+                    <option value="giam">Giá: Giảm dần</option>
+                    <option value="a-z">Tên: A-Z</option>
+                    <option value="z-a">Tên: Z-A</option>
+                </select>
+
+                <button type="submit">Lọc</button>
+            </form>
+        </div>
+        <!-- End Filter -->
+        <!-- Begin Products -->
+        <section class="products">
+            <div class="product-container">
+                <div class="product-items">
+                    {% for sanpham in sanpham_list %}
+                    <!-- single product -->
+                    <div class="product">
+                        <div class="product-content">
+                            <div class="product-img">
+                                <img src="{{sanpham.ImageURL}}" alt="product image">
+                            </div>
+                            <div class="product-btns">
+                                <button type="button" class="btn-cart" data-sanphamid="{{sanpham.id}}"> Thêm vào giỏ
+                                    <span><i class="fas fa-plus"></i></span>
+                                </button>
+                                <button type="button" class="btn-buy"> Mua Ngay
+                                    <span><i class="fas fa-shopping-cart"></i></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="product-info">
+                            <div class="product-info-top">
+                                <h2 class="sm-title">Ricons Shoes Store</h2>
+                                <div class="rating">
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <a href="#" class="product-name">{{sanpham.ten}}</a>
+                            <div class="product- price-container">
+                                {% if sanpham.khuyen_mai == True %}
+                                <strike class="product-price">{{sanpham.gia}}</strike>
+                                <p class="product-price">{{ sanpham.gia_km}} vnd</p>
+                                {% else %}
+                                <p class="product-price">{{sanpham.gia}} vnd</p>
+                                {% endif %}
+
+
+                            </div>
+                        </div>
+                        {% if sanpham.khuyen_mai == True %}
+                        <div class="off-info">
+                            <h2 class="sm-title">Giảm 10%</h2>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- end of single product -->
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- End Products -->
+
+        <!-- End Main Content -->
+    </div>
+</div>
+<!-- End Categories Content -->
+
+<!-- Begin Ajax của thêm vào giỏ hàng  -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.btn-cart').click(function () {
+            var san_pham_id = $(this).data('sanphamid');
+            var so_luong = 1;
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "them_vao_gio_hang" %}',
+                data: {
+                    'san_pham_id': san_pham_id,
+                    'so_luong': so_luong,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                    } else {
+                        alert('Đã xảy ra lỗi khi thêm vào giỏ hàng!');
+                    }
+                }
+            });
+        });
+    });
+</script>
+<!-- End Ajax của thêm vào giỏ hàng  -->
+{% endblock category %}

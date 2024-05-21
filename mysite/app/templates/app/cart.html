@@ -1,0 +1,141 @@
+{% extends 'app/base.html' %}
+
+{% block cart %}
+<section id="cart" class="container my-5" style="padding-top: 130px;">
+    <table>
+        <tr>
+            <th>Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+        </tr>
+        {% if muc_gio_hang %}
+        {% for muc in muc_gio_hang %}
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src="{{muc.san_pham.hinh.url}}" alt="">
+                    <div>
+                        <p>{{muc.san_pham.ten}}</p>
+                        <small>
+                            {% if muc.san_pham.khuyen_mai == True %}
+                            {{muc.san_pham.gia_km}}
+                            {% else %}
+                            {{muc.san_pham.gia}}
+                            {% endif %}
+                        </small><br>
+                        <button class="link-button delete-item" data-mucid="{{muc.id}}">Xoá</button>
+                        <input type="hidden" class="product-id" value="{{muc.san_pham.id}}">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="quantity">
+                    <button class="minus">-</button>
+                    <input type="number" value="{{muc.so_luong}}" min="1" style="width: 50px;">
+                    <button class="plus">+</button>
+                </div>
+            </td>
+            <td class="price">
+                {{muc.tong_gia_cua_tung_muc}} VNĐ
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3" style="text-align: center; vertical-align: middle; padding: 50px;">
+                <h5>Giỏ Hàng của bạn hiện tại đang trống</h5>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+
+</section>
+<div class="total-price container my-5">
+
+    <table>
+        {% if gia_tri_gio_hang != 0 %}
+        <tr>
+            <td>Tạm Tính</td>
+            <td class="price">{{gia_tri_gio_hang}} VNĐ</td>
+        </tr>
+        <tr>
+            <td>Vận Chuyển</td>
+            <td class="price">30000 VNĐ</td>
+        </tr>
+        <tr>
+            <td>Tổng Cộng</td>
+            <td class="price">{{gia_tri_gio_hang|add:30000}} VNĐ</td>
+        </tr>
+        {% else %}
+        {% endif %}
+    </table>
+</div>
+
+<!-- Begin Ajax để thực hiện cập nhật các mục giỏ hàng -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function capNhapSoLuong(sanPhamId, soLuong) {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cap_nhat_muc_gio_hang" %}',
+            data: {
+                'san_pham_id': sanPhamId,
+                'so_luong': soLuong,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Cập nhật số lượng thất bại!!!')
+                }
+            }
+        })
+    }
+
+    function xoaMucGioHang(mucId) {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "xoa_muc_gio_hang" %}',
+            data: {
+                'muc_id': mucId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert("Xóa mục giỏ hàng thất bại")
+                }
+            }
+
+        })
+    }
+
+    // xử lí sự kiện nhấn nút +
+    $('.plus').click(function () {
+        var sanPhamId = $(this).closest('tr').find('.product-id').val();
+        var soLuong = parseInt($(this).closest('tr').find('.quantity input').val()) + 1;
+        capNhapSoLuong(sanPhamId, soLuong);
+
+    });
+    // xử lí sự kiện nhấn nút - 
+    $('.minus').click(function () {
+        var sanPhamId = $(this).closest('tr').find('.product-id').val();
+        var soLuong = parseInt($(this).closest('tr').find('.quantity input').val()) - 1;
+        if (soLuong < 1) {
+            soLuong = 1;
+        }
+        capNhapSoLuong(sanPhamId, soLuong);
+    })
+    // xử lí xóa mục giỏ hàng 
+    $('.delete-item').click(function () {
+        var mucId = $(this).data('mucid');
+        xoaMucGioHang(mucId);
+    })
+
+</script>
+<!-- End Ajax để thực hiện cập nhật các mục giỏ hàng -->
+{% endblock cart %}

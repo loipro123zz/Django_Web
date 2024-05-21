@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+
+{% block login %}
+<section class="login-form">
+    <div class="wrapper">
+
+        <form action="{% url 'login_user' %}" method="post">
+            {% csrf_token %}
+            <h1>ĐĂNG NHẬP</h1>
+            <div class="input">
+                <input type="text" placeholder="Tên Đăng Nhập" name="username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input">
+                <input type="password" placeholder="Mật Khẩu" name="password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+
+            <div class="remember-tick">
+                <label for="">
+                    <input type="checkbox"> Ghi nhớ tài khoản
+                </label>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="button">Đăng Nhập</button>
+
+            <div class="register-link">
+                <p>Chưa có tài khoản ở Bitis? <a href="{% url 'register_user' %}"> Đăng ký ngay</a></p>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock login %}
