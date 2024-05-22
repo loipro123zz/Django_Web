@@ -3,11 +3,13 @@
 {% block cart %}
 <section id="cart" class="container my-5" style="padding-top: 130px;">
     <table>
+        {% if gio_hang != None %}
         <tr>
             <th>Sản Phẩm</th>
             <th>Số Lượng</th>
             <th>Giá</th>
         </tr>
+        {% endif %}
         {% if muc_gio_hang %}
         {% for muc in muc_gio_hang %}
         <tr>

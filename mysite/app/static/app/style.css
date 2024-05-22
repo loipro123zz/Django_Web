@@ -296,7 +296,7 @@ img {
 
 }
 
-.product-container {
+.product-card-container {
     width: 100%;
     margin: 0 auto;
 
@@ -352,11 +352,11 @@ img {
 .product {
     margin: 1rem;
     position: relative;
-    width: calc(20% - 2rem);
+    width: calc(25% - 2rem);
     /* Adjusted width to fit four products in a row */
-    flex-basis: calc(20% - 2rem);
-    /* Added flex-basis to make it work in flexbox */
+
 }
+
 
 .product-content {
     background: white;
@@ -448,8 +448,6 @@ img {
     display: inline-block;
     color: var(--carribean-green);
 }
-
-
 
 .product-img img {
     transition: transform 0.6s ease;
@@ -756,7 +754,7 @@ select {
 
 .product-container {
     display: flex;
-    max-width: 1500px;
+    max-width: 90%;
     padding: 20px;
     margin: 20px auto;
     /* Center the container */
