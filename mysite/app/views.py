@@ -20,9 +20,8 @@ def home(request):
 
     context = {'theloai_list' : theloai_list,
                'sanpham_list' : sanpham_list,
-               'sanpham_km_list' : sanpham_km_list,} 
+               'sanpham_km_list' : sanpham_km_list,}
     return render(request, "app/home.html", context)
-
 
 # đăng nhập
 def login_user(request):
@@ -160,4 +159,18 @@ def xoa_muc_gio_hang(request):
         return JsonResponse({'success' : True})
     return JsonResponse({'success' : False})
 
+# tính năng lấy tổng số lượng sản phẩm trong giỏ hàng để hiện lên icon Giỏ Hàng
+def lay_so_luong_san_pham_trong_gio_hang(user):
+    if user.is_authenticated:
+        gio_hang = GioHang.objects.filter(khach_hang=user, hoan_thanh=False).first()
+        if gio_hang:
+            muc_gio_hang = MucGioHang.objects.filter(gio_hang=gio_hang)
+            tong_san_pham = 0
+            for muc in muc_gio_hang:
+                tong_san_pham += muc.so_luong
+            return tong_san_pham
+    return 0
+        
+    
+                
 

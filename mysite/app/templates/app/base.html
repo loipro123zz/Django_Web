@@ -63,8 +63,14 @@
                         </button>
                     </form>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cart' %}">Giỏ Hàng <i class="fa-solid fa-cart-shopping"></i></a>
+                <li class="nav-item" style="margin-right: 10px;">
+                    <a class="nav-link" href="{% url 'cart' %}">
+                        Giỏ Hàng
+                        <span class="cart-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+                        <span class="cart-count">{{ tong_san_pham_trong_gio_hang }}</span>
+                    </a>
                 </li>
 
                 {% if user.is_authenticated %}

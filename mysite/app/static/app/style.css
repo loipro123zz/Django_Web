@@ -257,6 +257,17 @@ td .cart-info img {
     outline: none;
 }
 
+.cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+    position: absolute;
+    top: 20px;
+
+}
+
 /* -----------------      Product Style       ---------------------          */
 
 :root {
