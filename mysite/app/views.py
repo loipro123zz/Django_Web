@@ -170,9 +170,16 @@ def lay_so_luong_san_pham_trong_gio_hang(user):
                 tong_san_pham += muc.so_luong
             return tong_san_pham
     return 0
+
+# Hiển thị trang product-detail
+def product_detail(request):
+    return render (request, 'app/product-detail.html')
+
         
 # Hiển thị trang checkout
 def checkout(request):
     return render(request, 'app/checkout.html')
+
+
                 
 

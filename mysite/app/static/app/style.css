@@ -599,10 +599,10 @@ img {
 }
 
 /* ------------------ Checkout ------------- */
-.checkout-body {
+.checkout {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    margin-top: 135px;
+    margin-top: 140px;
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -643,29 +643,29 @@ img {
     text-decoration: underline;
 }
 
-/* h2 {
+.checkout h2 {
     margin: 20px 0;
 }
 
-p {
+.checkout p {
     margin: 10px 0;
 }
 
-form {
+.checkout form {
     display: flex;
     flex-direction: column;
-} */
+}
 
 .form-group {
     margin-bottom: 15px;
 }
 
-label {
+.checkout label {
     display: block;
     margin-bottom: 5px;
 }
 
-input,
+.checkout input,
 select {
     width: 100%;
     padding: 10px;
@@ -673,7 +673,7 @@ select {
     border-radius: 5px;
 }
 
-/* button {
+.checkout button {
     background-color: #e74c3c;
     color: #fff;
     border: none;
@@ -682,9 +682,9 @@ select {
     cursor: pointer;
 }
 
-button:hover {
+.checkout button:hover {
     background-color: #c0392b;
-} */
+}
 
 .order-summary img {
     width: 100px;
@@ -749,4 +749,356 @@ button:hover {
 
 .price-summary span {
     font-weight: bold;
+}
+
+/* -----------------      product-detail       ---------------------          */
+
+
+.product-container {
+    display: flex;
+    max-width: 1500px;
+    padding: 20px;
+    margin: 20px auto;
+    /* Center the container */
+}
+
+.product-images {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-images img {
+    border-radius: 15px;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.thumbnail-images {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.thumbnail-images img {
+    width: 22%;
+    height: auto;
+    cursor: pointer;
+}
+
+.product-details {
+    flex: 1;
+    margin: 30px;
+}
+
+.product-details .price {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.product-details p {
+    font-size: 25px;
+    color: rgb(24, 179, 24)
+}
+
+.product-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #40c9a2;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+select,
+input[type="number"] {
+    padding: 5px;
+    font-size: 16px;
+    width: 100px;
+}
+
+.quantity-container {
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.button-container button {
+    padding: 15px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 25px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.add-to-cart {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+
+}
+
+.buy-now {
+    background-color: #098077;
+    color: #fff;
+    border: none;
+}
+
+.size-instruction a {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.size-instruction a:hover {
+    text-decoration: underline;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup img {
+    max-width: 60%;
+    max-height: 100%;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.blur {
+    filter: blur(5px);
+}
+
+.size-instruction {
+    margin: 15px 0px;
+}
+
+
+/* Style for the list items */
+.list-service li {
+    border-bottom: 1px solid #ccc;
+    /* Add border bottom to each list item */
+    padding: 10px 0 20px 0;
+    list-style-type: none;
+}
+
+/* Style for the unordered list */
+/* Style for the unordered list */
+.list-service {
+    border: 1px solid #ccc;
+    /* Add border to the unordered list */
+    padding: 10px;
+    /* Add padding to the unordered list */
+    margin: 20px 0px;
+    /* Add margin to the unordered list and center it horizontally */
+    max-width: 600px;
+    /* Set maximum width for the unordered list */
+    width: 100%;
+    /* Set width to 100% to ensure responsiveness */
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.list-service img {
+    margin: 10px 10px 0 0;
+    width: 32px;
+    height: 32px;
+}
+
+.list-service li:last-child {
+    border-bottom: none;
+    /* Remove border bottom from the last list item */
+}
+
+.single-product-info {
+    max-width: 1700px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+
+}
+
+.single-product-info h1 {
+    color: #333;
+}
+
+.single-product-info p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.single-product-info ul {
+    margin-top: 10px;
+    padding-left: 20px;
+
+}
+
+.single-product-info ul li {
+    padding: 20px;
+
+}
+
+.product-details .availability {
+    margin-top: 10px;
+    font-size: 15px;
+    color: black;
+}
+
+.product-details .in-stock {
+    color: #67b3e6;
+    /* Pastel blue color */
+}
+
+/* -----------------     end product-detail       ---------------------          */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.zoomed-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* -----------------review --------------------- */
+
+.review-section {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.overall-rating {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.overall-rating h1 {
+    font-size: 3em;
+    color: #f39c12;
+    margin: 0;
+}
+
+.overall-rating .stars {
+    color: #f39c12;
+}
+
+.overall-rating p {
+    margin: 10px 0;
+}
+
+.overall-rating button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.overall-rating .rating-distribution {
+    margin-top: 20px;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.rating-bar .bar {
+    background-color: #e0e0e0;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.rating-bar .bar .filled {
+    background-color: #f39c12;
+    height: 100%;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.individual-reviews {
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+    margin-bottom: 20px;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+.review .stars {
+    color: #f39c12;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-images img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
 }

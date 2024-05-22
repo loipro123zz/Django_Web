@@ -1,0 +1,508 @@
+{% extends 'app/base.html' %}
+
+
+{% block product-detail %}
+<style>
+    .featured {
+        text-align: center;
+        font-weight: bold;
+        margin: 30px 0px 30px 0px;
+        padding: 15px;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Raleway', sans-serif;
+    }
+</style>
+<section id="single-product">
+    <div class="product-container">
+        <div class="product-images">
+            <img src="./assests/main1.webp" alt="Main Product Image" class="main-image" onclick="zoomImage(this)">
+            <div class="thumbnail-images">
+                <img src="./assests/sub1.webp" alt="Thumbnail 1" onclick="changeMainImage(this)">
+                <img src="./assests/sub2.webp" alt="Thumbnail 2" onclick="changeMainImage(this)">
+                <img src="./assests/sub3.webp" alt="Thumbnail 3" onclick="changeMainImage(this)">
+                <img src="./assests/sub4.webp" alt="Thumbnail 4" onclick="changeMainImage(this)">
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h1 class="product-name">Giày Thể Thao Nam Hunter Street Còn Gì Dùng Đó HS002M</h1>
+            <p class="price">850000</p>
+            <p class="availability">Tình trạng: <span class="in-stock">Còn hàng</span></p>
+            <br>
+            <label for="size" style="font-weight: bold;">Size:</label>
+            <select id="size" name="size">
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+            </select>
+            <div class="quantity-container">
+                <label for="quantity" style="font-weight: bold;">Số Lượng:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+            </div>
+            <div class="size-instruction">
+                Kích Thước: <a href="#" id="size-chart-link">(Xem Bảng Size)</a>
+            </div>
+            <div class="button-container">
+                <button class="add-to-cart"> <i class="fa-solid fa-cart-shopping"></i> Thêm Vào Giỏ</button>
+                <button class="buy-now"><i class="fa-solid fa-money-bill"></i> Mua Ngay</button>
+            </div>
+            <div class="service">
+                <ul class="list-service">
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_1.png?v=683">Cam kết chính
+                        hãng Ricons Shoe Store 100%</li>
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_2.png?v=683">Bảo hành 06
+                        tháng (<a href="https://bitis.com.vn/pages/chinh-sach-bao-hanh">click xem chi tiết</a>)</li>
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_3.png?v=683">Đổi size trong
+                        vòng 7 ngày (<a href="https://bitis.com.vn/pages/chinh-sach-doi-size">click xem chi
+                            tiết</a>)</li>
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_4.png?v=683">Đổi trả hàng
+                        trong vòng 7 ngày (<a href="https://bitis.com.vn/pages/chinh-sach-doi-tra">click xem chi
+                            tiết</a>)</li>
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_5.png?v=683">Free ship đơn
+                        hàng 1.5 Triệu</li>
+
+
+                    <li><img class="dt-width-auto"
+                            src="//theme.hstatic.net/1000230642/1001205219/14/service_ic_6.png?v=683">Hỗ trợ giao
+                        hàng 2h khi chọn hình thức vận chuyển Grab. Áp dụng khu vực HCM T2 - T7 (8H00 - 11H00 và
+                        14H00 - 16H00)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="popup" id="size-chart-popup">
+        <span class="close" id="close-popup">&times;</span>
+        <img src="./assests/size.webp" alt="Size Chart">
+    </div>
+
+</section>
+
+<section class="single-product-info">
+    <h1>Mô tả sản phẩm</h1>
+    <p>
+        Những đôi giày được tạo nên từ những mảnh ghép tưởng chừng đã bị lãng quên, Biti’s tiếp tục minh chứng cho
+        nỗ lực bền bỉ của mình trên con đường theo đuổi kỷ nguyên Xanh với 3 trụ cột Products - People - Planet với
+        BST “CÒN-GÌ-DÙNG-ĐÓ” 3.0 hoàn toàn MỚI!!!
+    </p>
+    <ul>
+        <li>
+            ✅ Là đôi giày đầu tiên được đầu tư sức sáng tạo dựa trên vật tư tồn - tỷ lệ sử dụng vật tư
+            còn-gì-dùng-đó lên đến 93% trên mẫu nam & 52% ở mẫu nữ.
+        </li>
+        <li>
+            ✅ Thiết kế trendy cân mọi outfit cùng phối màu lấy cảm hứng từ thiên nhiên.
+        </li>
+        <li>
+            ✅ Đế LiteTraction với chất liệu EVA cao su nhẹ và êm ái nâng đỡ bàn chân trên mọi trải nghiệm.
+        </li>
+        <li>
+            ✅ Đệm lót EVA ép khuôn với lớp trên từ vải thun và lớp dưới là EVA có lỗ đàn hồi thoáng khí giúp ôm đều
+            & định vị tốt bàn chân khi di chuyển; Kết hợp với chất liệu thun kháng khuẩn, giúp thấm hút mồ hôi, hạn
+            chế mùi và ẩm mốc.
+        </li>
+    </ul>
+</section>
+<div class="review-section">
+    <div class="overall-rating">
+        <h1>4.8/5</h1>
+        <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+        <p>98 lượt đánh giá</p>
+        <button>Viết đánh giá</button>
+        <div class="rating-distribution">
+            <div class="rating-bar">
+                <span>5 stars</span>
+                <div class="bar">
+                    <div class="filled" style="width: 78%;"></div>
+                </div>
+                <span>78</span>
+            </div>
+            <div class="rating-bar">
+                <span>4 stars</span>
+                <div class="bar">
+                    <div class="filled" style="width: 20%;"></div>
+                </div>
+                <span>20</span>
+            </div>
+            <div class="rating-bar">
+                <span>3 stars</span>
+                <div class="bar">
+                    <div class="filled" style="width: 0%;"></div>
+                </div>
+                <span>0</span>
+            </div>
+            <div class="rating-bar">
+                <span>2 stars</span>
+                <div class="bar">
+                    <div class="filled" style="width: 0%;"></div>
+                </div>
+                <span>0</span>
+            </div>
+            <div class="rating-bar">
+                <span>1 star</span>
+                <div class="bar">
+                    <div class="filled" style="width: 0%;"></div>
+                </div>
+                <span>0</span>
+            </div>
+        </div>
+    </div>
+    <div class="individual-reviews">
+        <div class="review">
+            <p><strong>htiten3010</strong> <span>Đã mua hàng</span> | <span
+                    class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 09:27:01</span></p>
+            <p>Giày đẹp, đóng gói chắc chắn và cẩn thận. Giày nhẹ, thích hợp chơi thể thao</p>
+            <div class="review-images">
+                <img src="./assests/review1.webp" alt="Review Image 1">
+                <img src="./assests/review1.webp" alt="Review Image 2">
+            </div>
+        </div>
+        <div class="review">
+            <p><strong>Loi12002</strong> <span>Đã mua hàng</span> | <span
+                    class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 02:27:01</span></p>
+            <p>Giày mang ok, Giao hàng rất nhanh vừa đặt hôm qua nay đã có</p>
+            <div class="review-images">
+
+            </div>
+        </div>
+        <div class="review">
+            <p><strong>Loi12002</strong> <span>Đã mua hàng</span> | <span
+                    class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 02:27:01</span></p>
+            <p>Giày mang ok, Giao hàng rất nhanh vừa đặt hôm qua nay đã có</p>
+            <div class="review-images">
+
+            </div>
+        </div>
+        <div class="review">
+            <p><strong>Loi12002</strong> <span>Đã mua hàng</span> | <span
+                    class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 02:27:01</span></p>
+            <p>Giày mang ok, Giao hàng rất nhanh vừa đặt hôm qua nay đã có</p>
+            <div class="review-images">
+
+            </div>
+        </div>
+        <div class="review">
+            <p><strong>Loi12002</strong> <span>Đã mua hàng</span> | <span
+                    class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 02:27:01</span></p>
+            <p>Giày mang ok, Giao hàng rất nhanh vừa đặt hôm qua nay đã có</p>
+            <div class="review-images">
+
+            </div>
+        </div>
+        <!-- Additional reviews can be added here similarly -->
+    </div>
+</div>
+<img style="max-width: 100%;" src="./assests/bitis-banner-_1__cb6d07732f434dfdae6cfec1aec45bb3.webp" alt="">
+<h1 class="featured" style="text-align: center; font-weight: bold; margin: 30px;">---- Có Thể Bạn Cũng Quan Tâm ----
+</h1>
+<section class="featured-product">
+    <section class="products">
+
+        <div class="product-container">
+            <div class="product-items">
+
+
+                <!-- single product -->
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
+                                alt="product image">
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <button type="button" class="btn-buy"> Mua Ngay
+                                <span><i class="fas fa-shopping-cart"></i></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">Ricons Shoes Store</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
+                        <p class="product-price">875000 vnđ</p>
+                        <p class="product-price">780000 vnđ</p>
+                    </div>
+
+                    <div class="off-info">
+                        <h2 class="sm-title">Giảm 10%</h2>
+                    </div>
+                </div>
+                <!-- end of single product -->
+                <!-- single product -->
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
+                                alt="product image">
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <button type="button" class="btn-buy"> Mua Ngay
+                                <span><i class="fas fa-shopping-cart"></i></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">Ricons Shoes Store</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
+                        <p class="product-price">875000 vnđ</p>
+                        <p class="product-price">780000 vnđ</p>
+                    </div>
+
+                    <div class="off-info">
+                        <h2 class="sm-title">Giảm 10%</h2>
+                    </div>
+                </div>
+                <!-- end of single product -->
+                <!-- single product -->
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
+                                alt="product image">
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <button type="button" class="btn-buy"> Mua Ngay
+                                <span><i class="fas fa-shopping-cart"></i></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">Ricons Shoes Store</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
+                        <p class="product-price">875000 vnđ</p>
+                        <p class="product-price">780000 vnđ</p>
+                    </div>
+
+                    <div class="off-info">
+                        <h2 class="sm-title">Giảm 10%</h2>
+                    </div>
+                </div>
+                <!-- end of single product -->
+                <!-- single product -->
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
+                                alt="product image">
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <button type="button" class="btn-buy"> Mua Ngay
+                                <span><i class="fas fa-shopping-cart"></i></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">Ricons Shoes Store</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
+                        <p class="product-price">875000 vnđ</p>
+                        <p class="product-price">780000 vnđ</p>
+                    </div>
+
+                    <div class="off-info">
+                        <h2 class="sm-title">Giảm 10%</h2>
+                    </div>
+                </div>
+                <!-- end of single product -->
+                <!-- single product -->
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
+                                alt="product image">
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <button type="button" class="btn-buy"> Mua Ngay
+                                <span><i class="fas fa-shopping-cart"></i></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">Ricons Shoes Store</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
+                        <p class="product-price">875000 vnđ</p>
+                        <p class="product-price">780000 vnđ</p>
+                    </div>
+
+                    <div class="off-info">
+                        <h2 class="sm-title">Giảm 10%</h2>
+                    </div>
+                </div>
+                <!-- end of single product -->
+
+
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock product-detail %}
+
+<!-- JS  -->
+<script>
+    // Get all the <td> elements with the class "price"
+    var priceCells = document.querySelectorAll('.price');
+
+    // Loop through each <td> element and append " VNĐ" to its content
+    priceCells.forEach(function (priceCell) {
+        var price = priceCell.textContent;
+        priceCell.textContent = price + ' VNĐ';
+    });
+
+
+    document.querySelectorAll('.quantity').forEach(function (quantityDiv) {
+        var minusButton = quantityDiv.querySelector('.minus');
+        var plusButton = quantityDiv.querySelector('.plus');
+        var quantityInput = quantityDiv.querySelector('input[type="number"]');
+
+        // Decrease quantity
+        minusButton.addEventListener('click', function () {
+            var currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        // Increase quantity
+        plusButton.addEventListener('click', function () {
+            var currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+    });
+
+    document.getElementById('size-chart-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('size-chart-popup').style.display = 'flex';
+        document.querySelector('.product-container').classList.add('blur');
+    });
+
+    document.getElementById('close-popup').addEventListener('click', function () {
+        document.getElementById('size-chart-popup').style.display = 'none';
+        document.querySelector('.product-container').classList.remove('blur');
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target == document.getElementById('size-chart-popup')) {
+            document.getElementById('size-chart-popup').style.display = 'none';
+            document.querySelector('.product-container').classList.remove('blur');
+        }
+    });
+    function zoomImage(image) {
+        var zoomedImage = document.createElement("img");
+        zoomedImage.src = image.src;
+        zoomedImage.alt = image.alt;
+        zoomedImage.classList.add("zoomed-image");
+
+        var overlay = document.createElement("div");
+        overlay.classList.add("overlay");
+        overlay.appendChild(zoomedImage);
+
+        overlay.addEventListener("click", function () {
+            overlay.remove();
+        });
+
+        document.body.appendChild(overlay);
+    }
+
+    function changeMainImage(thumbnail) {
+        var mainImage = document.querySelector(".main-image");
+        mainImage.src = thumbnail.src;
+        mainImage.alt = thumbnail.alt;
+    }
+
+</script>
+
+</html>
