@@ -597,3 +597,156 @@ img {
 .register-link p a:hover {
     text-decoration: underline;
 }
+
+/* ------------------ Checkout ------------- */
+.checkout-body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin-top: 135px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkout-section {
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary {
+    width: 35%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 150px;
+}
+
+.breadcrumb {
+    margin: 10px 0;
+}
+
+.breadcrumb a {
+    color: #3498db;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* h2 {
+    margin: 20px 0;
+}
+
+p {
+    margin: 10px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+} */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c0392b;
+} */
+
+.order-summary img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.product-summary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.voucher-section {
+    margin-bottom: 20px;
+}
+
+.voucher-section label,
+.voucher-section select,
+.voucher-section input,
+.voucher-section button,
+.voucher-section a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.voucher-list button {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.voucher-list button:hover {
+    background-color: #e67e22;
+}
+
+.shipping-info {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.price-summary {
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.price-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.price-summary span {
+    font-weight: bold;
+}
