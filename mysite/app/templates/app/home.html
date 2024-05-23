@@ -66,7 +66,9 @@
                                         Thêm vào giỏ
                                         <span><i class="fas fa-plus"></i></span>
                                     </button>
-                                    <button type="button" class="btn-buy"> Mua Ngay
+                                    <button type="button" class="btn-buy"
+                                        onclick="window.location.href='/product_detail/{{sanpham.id}}'">
+                                        Xem sản phẩm
                                         <span><i class="fas fa-shopping-cart"></i></span>
                                     </button>
                                 </div>
@@ -129,7 +131,9 @@
                                         Thêm vào giỏ
                                         <span><i class="fas fa-plus"></i></span>
                                     </button>
-                                    <button type="button" class="btn-buy"> Mua Ngay
+                                    <button type="button" class="btn-buy"
+                                        onclick="window.location.href='/product_detail/{{sanpham.id}}'">
+                                        Xem sản phẩm
                                         <span><i class="fas fa-shopping-cart"></i></span>
                                     </button>
                                 </div>
@@ -204,5 +208,6 @@
     });
 </script>
 <!-- End Ajax của thêm vào giỏ hàng  -->
+
 
 {% endblock content %}

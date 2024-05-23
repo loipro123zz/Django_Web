@@ -11,7 +11,7 @@ urlpatterns = [
     path('them_vao_gio_hang/', views.them_vao_gio_hang, name='them_vao_gio_hang'),
     path('cap_nhat_muc_gio_hang/', views.cap_nhat_muc_gio_hang, name='cap_nhat_muc_gio_hang'),
     path('xoa_muc_gio_hang', views.xoa_muc_gio_hang, name='xoa_muc_gio_hang'),
-    path('product_detail', views.product_detail, name='product_detail'),
+    path('product_detail/<int:san_pham_id>', views.product_detail, name='product_detail'),
     path('checkout', views.checkout, name='checkout'),
 ]
 

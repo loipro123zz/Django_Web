@@ -20,6 +20,7 @@ class SanPham(models.Model):
     gia_km = models.IntegerField(blank=True, null=True)
     mo_ta = models.CharField(max_length=500, default='', blank=True)
     
+    
     def __str__(self):
         return self.ten
     
@@ -47,6 +48,7 @@ class MucGioHang(models.Model):
     gio_hang = models.ForeignKey(GioHang, on_delete=models.SET_NULL, blank=True, null=True)
     so_luong = models.IntegerField(default=0, null=True, blank=True)
     ngay_them = models.DateTimeField(auto_now_add=True)
+    kich_thuoc = models.IntegerField(max_length=10, default=37)
     
     def tinh_tong_gia_cua_tung_muc(self):
         if self.san_pham.gia_km: 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -171,11 +171,16 @@ def lay_so_luong_san_pham_trong_gio_hang(user):
             return tong_san_pham
     return 0
 
-# Hiển thị trang product-detail
-def product_detail(request):
-    return render (request, 'app/product-detail.html')
-
-        
+# tính năng xem sản phẩm (hoặc là hiển thị trang product-detail)
+def product_detail(request, san_pham_id):
+    san_pham = SanPham.objects.get(pk=san_pham_id)
+    theloai_list = TheLoai.objects.all()
+    context = {
+        'san_pham' : san_pham, 
+        'theloai_list' : theloai_list
+    }
+    return render(request, 'app/product-detail.html', context)
+    
 # Hiển thị trang checkout
 def checkout(request):
     return render(request, 'app/checkout.html')
