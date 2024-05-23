@@ -1,32 +1,36 @@
 {% extends 'app/base.html' %}
 
 {% block cart %}
-<section id="cart" class="container my-5" style="padding-top: 130px;">
+<section id="cart" class="container my-5" style="padding-top: 130px; ">
     <table>
-        {% if gio_hang != None %}
+        {% if muc_gio_hang %}
         <tr>
             <th>Sản Phẩm</th>
             <th>Số Lượng</th>
-            <th>Giá</th>
+            <th>Tổng Giá</th>
         </tr>
         {% endif %}
         {% if muc_gio_hang %}
         {% for muc in muc_gio_hang %}
         <tr>
             <td>
-                <div class="cart-info">
+                <div class="cart-info" onclick="window.location.href='/product_detail/{{muc.san_pham.id}}'">
                     <img src="{{muc.san_pham.hinh.url}}" alt="">
                     <div>
                         <p>{{muc.san_pham.ten}}</p>
                         <small>
                             {% if muc.san_pham.khuyen_mai == True %}
-                            {{muc.san_pham.gia_km}}
+                            Giá: {{muc.san_pham.gia_km}} đ
                             {% else %}
-                            {{muc.san_pham.gia}}
+                            Giá: {{muc.san_pham.gia}} đ
                             {% endif %}
+                        </small><br>
+                        <small>
+                            Size: {{muc.kich_thuoc}}
                         </small><br>
                         <button class="link-button delete-item" data-mucid="{{muc.id}}">Xoá</button>
                         <input type="hidden" class="product-id" value="{{muc.san_pham.id}}">
+                        <input type="hidden" class="muc_kich_thuoc" value="{{muc.kich_thuoc}}">
                     </div>
                 </div>
             </td>
@@ -38,7 +42,7 @@
                 </div>
             </td>
             <td class="price">
-                {{muc.tong_gia_cua_tung_muc}} VNĐ
+                {{muc.tong_gia_cua_tung_muc}} đ
             </td>
         </tr>
         {% endfor %}
@@ -53,20 +57,19 @@
 
 </section>
 <div class="total-price container my-5">
-
     <table>
         {% if gia_tri_gio_hang != 0 %}
         <tr>
             <td>Tạm Tính</td>
-            <td class="price">{{gia_tri_gio_hang}} VNĐ</td>
+            <td class="price">{{gia_tri_gio_hang}} đ</td>
         </tr>
         <tr>
             <td>Vận Chuyển</td>
-            <td class="price">30000 VNĐ</td>
+            <td class="price">30000 đ</td>
         </tr>
         <tr>
             <td>Tổng Cộng</td>
-            <td class="price">{{gia_tri_gio_hang|add:30000}} VNĐ</td>
+            <td class="price">{{gia_tri_gio_hang|add:30000}} đ</td>
         </tr>
         {% else %}
         {% endif %}
@@ -79,13 +82,14 @@
 <!-- Begin Ajax để thực hiện cập nhật các mục giỏ hàng -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function capNhapSoLuong(sanPhamId, soLuong) {
+    function capNhapSoLuong(sanPhamId, soLuong, kichThuoc) {
         $.ajax({
             type: 'POST',
             url: '{% url "cap_nhat_muc_gio_hang" %}',
             data: {
                 'san_pham_id': sanPhamId,
                 'so_luong': soLuong,
+                'kich_thuoc': kichThuoc,
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             dataType: 'json',
@@ -123,7 +127,8 @@
     $('.plus').click(function () {
         var sanPhamId = $(this).closest('tr').find('.product-id').val();
         var soLuong = parseInt($(this).closest('tr').find('.quantity input').val()) + 1;
-        capNhapSoLuong(sanPhamId, soLuong);
+        var kichThuoc = $(this).closest('tr').find('.muc_kich_thuoc').val()
+        capNhapSoLuong(sanPhamId, soLuong, kichThuoc);
 
     });
     // xử lí sự kiện nhấn nút - 
@@ -133,7 +138,8 @@
         if (soLuong < 1) {
             soLuong = 1;
         }
-        capNhapSoLuong(sanPhamId, soLuong);
+        var kichThuoc = $(this).closest('tr').find('.muc_kich_thuoc').val()
+        capNhapSoLuong(sanPhamId, soLuong, kichThuoc);
     })
     // xử lí xóa mục giỏ hàng 
     $('.delete-item').click(function () {

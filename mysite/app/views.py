@@ -104,11 +104,12 @@ def them_vao_gio_hang(request):
     if request.method == "POST":
         san_pham_id = request.POST.get('san_pham_id')
         so_luong = request.POST.get('so_luong')
+        kich_thuoc = request.POST.get('kich_thuoc', '37')
 
         gio_hang, created = GioHang.objects.get_or_create(khach_hang=request.user, hoan_thanh=False, ten=request.user)
         san_pham = SanPham.objects.get(pk=san_pham_id)
 
-        muc_gio_hang, created = MucGioHang.objects.get_or_create(san_pham=san_pham, gio_hang=gio_hang)
+        muc_gio_hang, created = MucGioHang.objects.get_or_create(san_pham=san_pham, gio_hang=gio_hang, kich_thuoc=kich_thuoc)
         
         muc_gio_hang.so_luong = muc_gio_hang.so_luong + int(so_luong) 
         muc_gio_hang.save()
@@ -141,8 +142,8 @@ def cap_nhat_muc_gio_hang(request):
     if request.method == 'POST': 
         san_pham_id = request.POST.get('san_pham_id')
         so_luong = request.POST.get('so_luong')
-
-        muc_gio_hang = MucGioHang.objects.get(san_pham=san_pham_id, gio_hang__khach_hang = request.user, gio_hang__hoan_thanh=False)
+        kich_thuoc = request.POST.get('kich_thuoc')
+        muc_gio_hang = MucGioHang.objects.get(san_pham=san_pham_id, gio_hang__khach_hang = request.user, gio_hang__hoan_thanh=False, kich_thuoc=kich_thuoc)
         muc_gio_hang.so_luong = so_luong
         muc_gio_hang.save()
 

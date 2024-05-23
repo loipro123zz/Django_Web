@@ -235,7 +235,8 @@
     </div>
 </div>
 <img style="max-width: 100%;" src="./assests/bitis-banner-_1__cb6d07732f434dfdae6cfec1aec45bb3.webp" alt="">
-<h1 class="featured" style="text-align: center; font-weight: bold; margin: 30px;">---- Có Thể Bạn Cũng Quan Tâm ----
+<h1 class="featured" style="text-align: center; font-weight: bold; margin: 30px;">
+    ---- Có Thể Bạn Cũng Quan Tâm ----
 </h1>
 <section class="featured-product">
     <section class="products">
@@ -447,13 +448,14 @@
         $('.add-to-cart').click(function () {
             var san_pham_id = $(this).data('sanphamid');
             var so_luong = 1;
-            console.log('San pham ID:', san_pham_id);
+            var kich_thuoc = $('#size').val();
             $.ajax({
                 type: 'POST',
                 url: '{% url "them_vao_gio_hang" %}',
                 data: {
                     'san_pham_id': san_pham_id,
                     'so_luong': so_luong,
+                    'kich_thuoc': kich_thuoc,
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 dataType: 'json',

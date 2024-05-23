@@ -3,7 +3,7 @@
 {% block category %}
 
 <!-- Begin Categories Content -->
-<div class="container-pdt" style="padding-top: 130px;">
+<div class="container-pdt" style="padding-top: 130px; ">
     <div class="row">
         <!-- Begin Left Menu -->
         <div class="col-2" style="  padding: auto; margin-top: 50px;">
@@ -49,7 +49,8 @@
                                 <button type="button" class="btn-cart" data-sanphamid="{{sanpham.id}}"> Thêm vào giỏ
                                     <span><i class="fas fa-plus"></i></span>
                                 </button>
-                                <button type="button" class="btn-buy"> Mua Ngay
+                                <button type="button" class="btn-buy"
+                                    onclick="window.location.href='/product_detail/{{sanpham.id}}'"> Xem Sản Phẩm
                                     <span><i class="fas fa-shopping-cart"></i></span>
                                 </button>
                             </div>
