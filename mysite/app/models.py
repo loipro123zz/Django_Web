@@ -40,7 +40,7 @@ class GioHang(models.Model):
     hoan_thanh = models.BooleanField(default=False, null=True, blank=False)
 
     def __str__(self):
-        return str(self.ten)
+        return str('Giỏ hàng có stt ' + str(self.id) + ' của ' + self.ten)
     
 
 class MucGioHang(models.Model):
@@ -57,15 +57,19 @@ class MucGioHang(models.Model):
             tong_gia = self.san_pham.gia * self.so_luong
         return tong_gia
     
+    def __str__(self):
+        return str('Mục ' + str(self.id) + ' ' + str(self.gio_hang))
+        
 
 class DiaChiGiaoHang(models.Model):
     khach_hang = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     gio_hang = models.ForeignKey(GioHang, on_delete=models.SET_NULL, blank=True, null=True)
     thanh_pho = models.CharField(max_length=300, null=True)
     quan = models.CharField(max_length=300, null=True)
+    phuong = models.CharField(max_length=300, null=True)
     dia_chi = models.CharField(max_length=300, null=True)
     sdt = models.CharField(max_length=300, null=True)
     ngay_giao = models.DateTimeField(auto_now_add=True)
-
+    email = models.EmailField(max_length=300, null=True)
     def __str__(self):
         return str(self.dia_chi)

@@ -8,12 +8,11 @@
             <img src="bitis-logo.png" alt="Biti's Logo">
         </div>
         <div class="breadcrumb">
-            <a href="#">Giỏ hàng</a> &gt; <a href="#">Thông tin giao hàng</a> &gt; <a href="#">Phương thức thanh
-                toán</a>
+            <a href="#">Giỏ hàng</a> &gt; <a href="#">Thông tin giao hàng</a>
         </div>
         <h2>Thông tin giao hàng</h2>
-        <p>Bạn đã có tài khoản? <a href="#">Đăng nhập</a></p>
-        <form>
+        <form method="post" action="{% url 'checkout' %}">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="name">Họ và tên</label>
                 <input type="text" id="name" name="name" required>
@@ -33,7 +32,7 @@
             <div class="form-group">
                 <label for="city">Tỉnh / thành</label>
                 <select id="city" name="city" required>
-                    <option value="">Chọn tỉnh / thành</option>
+                    <option>Chọn tỉnh / thành</option>
                     <option value="Hanoi">Hà Nội</option>
                     <option value="HoChiMinhCity">TP. Hồ Chí Minh</option>
                     <option value="DaNang">Đà Nẵng</option>
@@ -54,17 +53,36 @@
                 <label for="ward">Phường / xã</label>
                 <input type="text" id="ward" name="ward" required>
             </div>
-            <button type="submit">Tiếp tục đến phương thức thanh toán</button>
+            <button type="submit">Đặt Hàng</button>
         </form>
     </div>
     <div class="order-summary">
+        {% for muc in muc_gio_hang %}
         <div class="product-summary">
-            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp" alt="Product Image">
+            <div style="position: relative;">
+                <img src="{{muc.san_pham.hinh.url}}" alt="Product Image" style="display: block;">
+                <span style="position: absolute;
+                top: -5px;
+                right: 5px;
+                background-color: rgba(255, 0, 0, 0.8);
+                color: white;
+                padding: 2px 7px;
+                border-radius: 50%;
+                font-size: 12px;
+                font-weight: bold;">{{muc.so_luong}}</span>
+            </div>
             <div>
-                <p>Giày Thể Thao Nam Biti's Hunter Street Cổ Gi Dũng Đỏ HSM006300</p>
-                <p>814,000 đ</p>
+                <p>{{muc.san_pham.ten}}</p>
+                {% if muc.san_pham.khuyen_mai == True %}
+                <p>{{muc.san_pham.gia_km}} đ </p>
+                {% else %}
+                <p>Giá: {{muc.san_pham.gia}} đ </p>
+                {% endif %}
+                <p style="color: red;">Tổng: {{muc.tong_gia_cua_tung_muc}} đ</p>
+
             </div>
         </div>
+        {% endfor %}
         <div class="voucher-section">
             <label for="voucher">Chọn loại voucher:</label>
             <select id="voucher" name="voucher">
@@ -84,12 +102,11 @@
             <p>🔥 Mua thêm <span>686,000 đ</span> nữa để được miễn phí giao hàng.</p>
         </div>
         <div class="price-summary">
-            <p>Tạm tính: <span>814,000 đ</span></p>
+            <p>Tạm tính: <span>{{gia_tri_gio_hang}} đ</span></p>
             <p>Phí vận chuyển: <span>-</span></p>
             <p>Tổng cộng: <span>814,000 đ</span></p>
         </div>
     </div>
-    <script src="script.js"></script>
 </div>
 
 {% endblock checkout %}

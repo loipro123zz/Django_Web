@@ -184,7 +184,47 @@ def product_detail(request, san_pham_id):
     
 # Hiển thị trang checkout
 def checkout(request):
-    return render(request, 'app/checkout.html')
+    gio_hang = GioHang.objects.get(khach_hang=request.user, hoan_thanh=False)
+    muc_gio_hang = MucGioHang.objects.filter(gio_hang=gio_hang)
+    gia_tri_gio_hang = 0
+    for muc in muc_gio_hang:
+        muc.tong_gia_cua_tung_muc = muc.tinh_tong_gia_cua_tung_muc()
+        gia_tri_gio_hang += muc.tong_gia_cua_tung_muc
+
+    context = {
+        'muc_gio_hang' : muc_gio_hang,
+        'gia_tri_gio_hang' : gia_tri_gio_hang
+    }
+
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        sdt = request.POST['phone']
+        dia_chi = request.POST['address']
+        thanh_pho = request.POST['city']
+        quan = request.POST['district']
+        phuong = request.POST['ward']
+        
+        dia_chi_giao_hang = DiaChiGiaoHang.objects.create(
+            khach_hang = request.user,
+            gio_hang = gio_hang,
+            sdt = sdt,
+            email = email,
+            dia_chi = dia_chi,
+            thanh_pho = thanh_pho, 
+            quan = quan,
+            phuong = phuong
+        )
+        dia_chi_giao_hang.save()
+
+        gio_hang.hoan_thanh = True
+        gio_hang.save()
+
+        user = request.user
+        user.last_name = name
+        user.save()    
+
+    return render(request, 'app/checkout.html', context)
 
 
                 
