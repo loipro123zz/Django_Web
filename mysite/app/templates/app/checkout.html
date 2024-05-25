@@ -14,7 +14,7 @@
         <form method="post" action="{% url 'checkout' %}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="name">Họ và tên</label>
+                <label for="name">Họ và tên người nhận</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
@@ -103,8 +103,8 @@
         </div>
         <div class="price-summary">
             <p>Tạm tính: <span>{{gia_tri_gio_hang}} đ</span></p>
-            <p>Phí vận chuyển: <span>-</span></p>
-            <p>Tổng cộng: <span>814,000 đ</span></p>
+            <p>Phí vận chuyển: <span>30000 đ</span></p>
+            <p>Tổng cộng: <span>{{gia_tri_gio_hang|add:30000}} đ</span></p>
         </div>
     </div>
 </div>

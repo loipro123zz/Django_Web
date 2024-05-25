@@ -57,6 +57,7 @@ def register_user(request):
     context = {'theloai_list' : theloai_list} 
 
     if request.method == 'POST':
+        name = request.POST['name']
         username = request.POST['username']
         email = request.POST['email']
         password1 = request.POST['password1']
@@ -66,7 +67,7 @@ def register_user(request):
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Tên đăng nhập đã tồn tại!!! Vui lòng nhập lại tên đăng nhập khác.')
             else:
-                user = User.objects.create_user(username=username, email=email, password=password1)
+                user = User.objects.create_user(last_name=name, username=username, email=email, password=password1)
                 user.save()
                 messages.success(request, 'Tạo tài khoản thành công')
                 return redirect('login_user')
@@ -186,6 +187,7 @@ def product_detail(request, san_pham_id):
     
 # Hiển thị trang checkout
 def checkout(request):
+    theloai_list = TheLoai.objects.all()
     gio_hang = GioHang.objects.get(khach_hang=request.user, hoan_thanh=False)
     muc_gio_hang = MucGioHang.objects.filter(gio_hang=gio_hang)
     gia_tri_gio_hang = 0
@@ -195,11 +197,12 @@ def checkout(request):
 
     context = {
         'muc_gio_hang' : muc_gio_hang,
-        'gia_tri_gio_hang' : gia_tri_gio_hang
+        'gia_tri_gio_hang' : gia_tri_gio_hang,
+        'theloai_list' : theloai_list,
     }
 
     if request.method == "POST":
-        name = request.POST['name']
+        ten_nguoi_nhan = request.POST['name']
         email = request.POST['email']
         sdt = request.POST['phone']
         dia_chi = request.POST['address']
@@ -215,19 +218,35 @@ def checkout(request):
             dia_chi = dia_chi,
             thanh_pho = thanh_pho, 
             quan = quan,
-            phuong = phuong
+            phuong = phuong,
+            ten_nguoi_nhan = ten_nguoi_nhan
         )
         dia_chi_giao_hang.save()
 
         gio_hang.hoan_thanh = True
         gio_hang.save()
 
-        user = request.user
-        user.last_name = name
-        user.save()    
-
+          
     return render(request, 'app/checkout.html', context)
 
+
+
+
+
+
+# tính năng tìm kiếm sản phẩm (hiển thị trang search)
+def search(request):
+   
+    query = request.GET.get('search', '')
+    if query: 
+        san_pham_tim_kiem_list = SanPham.objects.filter(ten__icontains=query)
+    else: 
+        san_pham_tim_kiem_list = SanPham.objects.none()
+    context = {
+        'query' : query,
+        'san_pham_tim_kiem_list' : san_pham_tim_kiem_list,
+    }
+    return render(request, 'app/search.html', context)
 
                 
 

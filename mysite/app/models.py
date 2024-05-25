@@ -71,5 +71,6 @@ class DiaChiGiaoHang(models.Model):
     sdt = models.CharField(max_length=300, null=True)
     ngay_giao = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(max_length=300, null=True)
+    ten_nguoi_nhan = models.CharField(max_length=300, null=True)
     def __str__(self):
         return str(self.dia_chi)

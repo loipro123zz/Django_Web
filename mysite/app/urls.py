@@ -13,6 +13,7 @@ urlpatterns = [
     path('xoa_muc_gio_hang', views.xoa_muc_gio_hang, name='xoa_muc_gio_hang'),
     path('product_detail/<int:san_pham_id>', views.product_detail, name='product_detail'),
     path('checkout', views.checkout, name='checkout'),
+    path('search', views.search, name='search'),
 ]
 
 
