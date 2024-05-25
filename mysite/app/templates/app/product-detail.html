@@ -63,7 +63,7 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     Thêm Vào Giỏ
                 </button>
-                <button class="buy-now"><i class="fa-solid fa-money-bill"></i>
+                <button class="buy-now" data-sanphamid="{{san_pham.id}}"><i class="fa-solid fa-money-bill"></i>
                     Mua Ngay
                 </button>
             </div>
@@ -116,28 +116,9 @@
 </section>
 <section class="single-product-info">
     <h1>Mô tả sản phẩm</h1>
-    <p>
-        Những đôi giày được tạo nên từ những mảnh ghép tưởng chừng đã bị lãng quên, Biti’s tiếp tục minh chứng cho
-        nỗ lực bền bỉ của mình trên con đường theo đuổi kỷ nguyên Xanh với 3 trụ cột Products - People - Planet với
-        BST “CÒN-GÌ-DÙNG-ĐÓ” 3.0 hoàn toàn MỚI!!!
-    </p>
-    <ul>
-        <li>
-            ✅ Là đôi giày đầu tiên được đầu tư sức sáng tạo dựa trên vật tư tồn - tỷ lệ sử dụng vật tư
-            còn-gì-dùng-đó lên đến 93% trên mẫu nam & 52% ở mẫu nữ.
-        </li>
-        <li>
-            ✅ Thiết kế trendy cân mọi outfit cùng phối màu lấy cảm hứng từ thiên nhiên.
-        </li>
-        <li>
-            ✅ Đế LiteTraction với chất liệu EVA cao su nhẹ và êm ái nâng đỡ bàn chân trên mọi trải nghiệm.
-        </li>
-        <li>
-            ✅ Đệm lót EVA ép khuôn với lớp trên từ vải thun và lớp dưới là EVA có lỗ đàn hồi thoáng khí giúp ôm đều
-            & định vị tốt bàn chân khi di chuyển; Kết hợp với chất liệu thun kháng khuẩn, giúp thấm hút mồ hôi, hạn
-            chế mùi và ẩm mốc.
-        </li>
-    </ul>
+    <!-- Viết Mô tả  -->
+
+    <!--  -->
 </section>
 <!-- End Product Detail -->
 {% endif %}
@@ -473,7 +454,43 @@
     });
 </script>
 <!-- End Ajax của thêm vào giỏ hàng  -->
+
+<!-- Begin Ajax của mua ngay (nó cũng y chang cái thêm vào giỏ hàng thôi. nhưng mà nếu nhấn mua ngay thì nó sẽ chuyển đến trang giỏ hàng luôn)  -->
+<script>
+    $(document).ready(function () {
+        $('.buy-now').click(function () {
+            var san_pham_id = $(this).data('sanphamid');
+            var so_luong = 1;
+            var kich_thuoc = $('#size').val();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "them_vao_gio_hang" %}',
+                data: {
+                    'san_pham_id': san_pham_id,
+                    'so_luong': so_luong,
+                    'kich_thuoc': kich_thuoc,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = '/cart/';
+                    } else {
+                        alert('Đã xảy ra lỗi khi thêm vào giỏ hàng!');
+                    }
+                }
+            });
+        });
+    });
+</script>
+<!-- Begin Ajax của mua ngay (nó cũng y chang cái thêm vào giỏ hàng thôi. nhưng mà nếu nhấn mua ngay thì nó sẽ chuyển đến trang giỏ hàng luôn)  -->
 {% endblock product-detail %}
+
+
+
+
+
+
 
 <!-- JS  -->
 <script>

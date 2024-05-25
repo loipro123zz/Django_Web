@@ -16,7 +16,7 @@ def home(request):
     theloai_list = TheLoai.objects.all()
 
     # list sản phẩm khuyến mãi
-    sanpham_km_list = SanPham.objects.filter(khuyen_mai = True).order_by('-id')[:5]
+    sanpham_km_list = SanPham.objects.filter(khuyen_mai = True).order_by('-id')[:4]
 
     context = {'theloai_list' : theloai_list,
                'sanpham_list' : sanpham_list,
@@ -181,6 +181,8 @@ def product_detail(request, san_pham_id):
         'theloai_list' : theloai_list
     }
     return render(request, 'app/product-detail.html', context)
+
+
     
 # Hiển thị trang checkout
 def checkout(request):
