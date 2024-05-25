@@ -88,7 +88,7 @@
                         {{request.user}} <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Trang Cá Nhân</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user_profile' %}">Trang Cá Nhân</a></li>
                         <li><a class="dropdown-item" href="#">Đơn Hàng</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -187,6 +187,10 @@
 
     <!-- Search -->
     {% block search %} {% endblock search %}
+
+    <!-- User Profile -->
+    {% block user_profile %} {% endblock user_profile %}
+
 
     <!-- End Body -->
 

@@ -248,5 +248,14 @@ def search(request):
     }
     return render(request, 'app/search.html', context)
 
+# Hiển thị trang user profile của người dùng
+def user_profile(request):
+
+
+    context = {
+
+    }
+    return render(request, 'app/user-profile.html', context)
+
                 
 
