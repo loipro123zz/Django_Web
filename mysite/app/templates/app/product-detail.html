@@ -107,17 +107,17 @@
         </div>
 
     </div>
-
     <div class="popup" id="size-chart-popup">
         <span class="close" id="close-popup">&times;</span>
         <img src="{% static 'images/size.webp' %}" alt="Size Chart">
     </div>
-
 </section>
 <section class="single-product-info">
     <h1>Mô tả sản phẩm</h1>
     <!-- Viết Mô tả  -->
-
+    <p>
+        {{ san_pham.mo_ta|safe }}
+    </p>
     <!--  -->
 </section>
 <!-- End Product Detail -->
@@ -213,70 +213,68 @@
         <!-- Additional reviews can be added here similarly -->
     </div>
 </div>
-<img style="max-width: 100%;" src="./assests/bitis-banner-_1__cb6d07732f434dfdae6cfec1aec45bb3.webp" alt="">
+<img style="max-width: 100%;" src="{% static 'images/rions-banner.webp'%}" alt="">
 <h1 class="featured" style="text-align: center; font-weight: bold; margin: 30px;">
     ---- Có Thể Bạn Cũng Quan Tâm ----
 </h1>
-<section class="featured-product">
-    <section class="products">
-
-        <div class="product-container">
-            <div class="product-items">
-
-                {% for san_pham_random in random_san_pham_list %}
-                <!-- single product -->
-                <div class="product">
-                    <div class="product-content">
-                        <div class="product-img">
-                            <img src="{{san_pham_random.ImageURL}}" alt="product image">
-                        </div>
-                        <div class="product-btns">
-                            <button type="button" class="btn-cart" data-sanphamid="{{san_pham_random.id}}">
-                                Thêm vào giỏ
-                                <span><i class="fas fa-plus"></i></span>
-                            </button>
-                            <button type="button" class="btn-buy"
-                                onclick="window.location.href='/product_detail/{{san_pham_random.id}}'">
-                                Xem sản phẩm
-                                <span><i class="fas fa-shopping-cart"></i></span>
-                            </button>
-                        </div>
+<!-- Begin Products -->
+<section class="products">
+    <div class="product-card-container">
+        <div class="product-items">
+            {% for sanpham in random_san_pham_list %}
+            <!-- single product -->
+            <div class="product">
+                <div class="product-content">
+                    <div class="product-img">
+                        <img src="{{sanpham.ImageURL}}" alt="product image">
                     </div>
-
-                    <div class="product-info">
-                        <div class="product-info-top">
-                            <h2 class="sm-title">Ricons Shoes Store</h2>
-                            <div class="rating">
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                                <span><i class="fas fa-star"></i></span>
-                            </div>
-                        </div>
-                        <a href="#" class="product-name">{{san_pham_random.ten}}</a>
-                        <div class="product- price-container">
-                            {% if san_pham_random.khuyen_mai == True %}
-                            <strike class="product-price">{{san_pham_random.gia}}</strike>
-                            <p class="product-price">{{ san_pham_random.gia_km}} đ</p>
-                            {% else %}
-                            <p class="product-price">{{san_pham_random.gia}} đ</p>
-                            {% endif %}
-                        </div>
+                    <div class="product-btns">
+                        <button type="button" class="btn-cart" data-sanphamid="{{sanpham.id}}">
+                            Thêm vào giỏ
+                            <span><i class="fas fa-plus"></i></span>
+                        </button>
+                        <button type="button" class="btn-buy"
+                            onclick="window.location.href='/product_detail/{{sanpham.id}}'">
+                            Xem sản phẩm
+                            <span><i class="fas fa-shopping-cart"></i></span>
+                        </button>
                     </div>
-                    {% if san_pham_random.khuyen_mai == True %}
-                    <div class="off-info">
-                        <h2 class="sm-title">Giảm 10%</h2>
-                    </div>
-                    {% endif %}
                 </div>
-                <!-- end of single product -->
-                {% endfor %}
 
+                <div class="product-info">
+                    <div class="product-info-top">
+                        <h2 class="sm-title">Ricons Shoes Store</h2>
+                        <div class="rating">
+                            <span><i class="fas fa-star"></i></span>
+                            <span><i class="fas fa-star"></i></span>
+                            <span><i class="fas fa-star"></i></span>
+                            <span><i class="fas fa-star"></i></span>
+                            <span><i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                    <a href="#" class="product-name">{{sanpham.ten}}</a>
+                    <div class="product- price-container">
+                        {% if sanpham.khuyen_mai == True %}
+                        <strike class="product-price">{{sanpham.gia}}</strike>
+                        <p class="product-price">{{ sanpham.gia_km}} đ</p>
+                        {% else %}
+                        <p class="product-price">{{sanpham.gia}} đ</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if sanpham.khuyen_mai == True %}
+                <div class="off-info">
+                    <h2 class="sm-title">Giảm 10%</h2>
+                </div>
+                {% endif %}
             </div>
+            <!-- end of single product -->
+            {% endfor %}
         </div>
-    </section>
+    </div>
 </section>
+<!-- End Products -->
+
 <!-- Begin Ajax của thêm vào giỏ hàng  -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
