@@ -89,7 +89,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'user_profile' %}">Trang Cá Nhân</a></li>
-                        <li><a class="dropdown-item" href="#">Đơn Hàng</a></li>
+                        <li><a class="dropdown-item" href="{% url 'donhang' %}">Đơn Hàng</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -191,6 +191,8 @@
     <!-- User Profile -->
     {% block user_profile %} {% endblock user_profile %}
 
+    <!-- Don Hang -->
+    {% block donhang %} {% endblock donhang %}
 
     <!-- End Body -->
 

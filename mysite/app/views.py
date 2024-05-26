@@ -177,9 +177,14 @@ def lay_so_luong_san_pham_trong_gio_hang(user):
 def product_detail(request, san_pham_id):
     san_pham = SanPham.objects.get(pk=san_pham_id)
     theloai_list = TheLoai.objects.all()
+
+    # Lấy ngẫu nhiên 4 sản phẩm để hiển thị ở phẩn bạn có thể quan tâm
+    random_san_pham_list = SanPham.objects.order_by('?')[:4]
+
     context = {
         'san_pham' : san_pham, 
-        'theloai_list' : theloai_list
+        'theloai_list' : theloai_list,
+        'random_san_pham_list' : random_san_pham_list,
     }
     return render(request, 'app/product-detail.html', context)
 
@@ -225,12 +230,10 @@ def checkout(request):
 
         gio_hang.hoan_thanh = True
         gio_hang.save()
-
+        messages.success(request, 'Đặt hàng thành công')
+        return redirect ('home')
           
     return render(request, 'app/checkout.html', context)
-
-
-
 
 
 
@@ -284,15 +287,23 @@ def user_profile(request):
                 messages.success(request, 'Thay đổi mật khẩu thành công')
                 return redirect('login_user')
             else: 
-                messages.error(request, 'Mật khẩu xác thực mật khẩu mới không giống!!!')
                 return redirect('user_profile')
         else:
-            messages.error(request, 'Mật khẩu hiện tại không đúng !!!')
             return redirect('user_profile') 
     context = {
         'profile' : profile
     }
     return render(request, 'app/user-profile.html', context)
+
+
+# Hiển thị trang Đơn Hàng 
+def donhang(request):
+    gio_hang_nguoi_dung = GioHang.objects.filter(khach_hang=request.user)
+    context = {     
+        'gio_hang_nguoi_dung' : gio_hang_nguoi_dung,
+    }
+
+    return render(request, 'app/donhang.html', context)
 
                 
 

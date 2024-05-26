@@ -1,0 +1,90 @@
+{% extends 'app/base.html' %}
+
+{% block donhang %}
+<style>
+    .order-container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .order-card {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .order-items {
+        margin-top: 20px;
+    }
+
+    .order-items h3 {
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .item {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .order-summary {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    strong {
+        color: #333;
+    }
+</style>
+<div class="order-container" style="margin-top: 150px;">
+    <h1>Thông Tin Đơn Hàng</h1>
+    {% for gio_hang in gio_hang_nguoi_dung %}
+    <div class="order-card">
+        <h2>Đơn Hàng #ABC{{gio_hang.id}}</h2>
+        <p><strong>Ngày đặt hàng:</strong> {{gio_hang.ngay_dat}}</p>
+        <p><strong>Trạng thái:</strong> Đang xử lý</p>
+
+        <div class="order-items">
+            <h3>Sản phẩm</h3>
+            {% for muc in gio_hang.mucgiohang_set.all %}
+            <div class="item">
+                <p><strong>Tên sản phẩm:</strong> {{muc.san_pham.ten}}</p>
+                <p><strong>Số lượng:</strong> {{muc.so_luong}}</p>
+                <p><strong>Giá:</strong>
+                    {% if muc.san_pham.khuyen_mai %}
+                    {{ muc.san_pham.gia_km }} đ
+                    {% else %}
+                    {{ muc.san_pham.gia }} đ
+                    {% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock donhang %}

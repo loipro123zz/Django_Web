@@ -1,5 +1,5 @@
 {% extends 'app/base.html' %}
-
+{% load static %}
 
 {% block product-detail %}
 <style>
@@ -23,10 +23,10 @@
         <div class="product-images">
             <img src="{{san_pham.ImageURL}}" alt="Main Product Image" class="main-image" onclick="zoomImage(this)">
             <div class="thumbnail-images">
-                <img src="./assests/sub1.webp" alt="Thumbnail 1" onclick="changeMainImage(this)">
-                <img src="./assests/sub2.webp" alt="Thumbnail 2" onclick="changeMainImage(this)">
-                <img src="./assests/sub3.webp" alt="Thumbnail 3" onclick="changeMainImage(this)">
-                <img src="./assests/sub4.webp" alt="Thumbnail 4" onclick="changeMainImage(this)">
+                <img src="{{san_pham.hinh_phu_1.url}}" alt="Thumbnail 1" onclick="changeMainImage(this)">
+                <img src="{{san_pham.hinh_phu_2.url}}" alt="Thumbnail 2" onclick="changeMainImage(this)">
+                <img src="{{san_pham.hinh_phu_3.url}}" alt="Thumbnail 3" onclick="changeMainImage(this)">
+                <img src="{{san_pham.hinh_phu_4.url}}" alt="Thumbnail 4" onclick="changeMainImage(this)">
             </div>
         </div>
 
@@ -110,7 +110,7 @@
 
     <div class="popup" id="size-chart-popup">
         <span class="close" id="close-popup">&times;</span>
-        <img src="./assests/size.webp" alt="Size Chart">
+        <img src="{% static 'images/size.webp' %}" alt="Size Chart">
     </div>
 
 </section>
@@ -177,10 +177,6 @@
             <p><strong>htiten3010</strong> <span>Đã mua hàng</span> | <span
                     class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> | <span>19/07/2023, 09:27:01</span></p>
             <p>Giày đẹp, đóng gói chắc chắn và cẩn thận. Giày nhẹ, thích hợp chơi thể thao</p>
-            <div class="review-images">
-                <img src="./assests/review1.webp" alt="Review Image 1">
-                <img src="./assests/review1.webp" alt="Review Image 2">
-            </div>
         </div>
         <div class="review">
             <p><strong>Loi12002</strong> <span>Đã mua hàng</span> | <span
@@ -227,19 +223,21 @@
         <div class="product-container">
             <div class="product-items">
 
-
+                {% for san_pham_random in random_san_pham_list %}
                 <!-- single product -->
                 <div class="product">
                     <div class="product-content">
                         <div class="product-img">
-                            <img src="./assests/hsm006300nau__10__f3fb2850cdd545049a232d62dd50950b_large.webp"
-                                alt="product image">
+                            <img src="{{san_pham_random.ImageURL}}" alt="product image">
                         </div>
                         <div class="product-btns">
-                            <button type="button" class="btn-cart"> Thêm vào giỏ
+                            <button type="button" class="btn-cart" data-sanphamid="{{san_pham_random.id}}">
+                                Thêm vào giỏ
                                 <span><i class="fas fa-plus"></i></span>
                             </button>
-                            <button type="button" class="btn-buy"> Mua Ngay
+                            <button type="button" class="btn-buy"
+                                onclick="window.location.href='/product_detail/{{san_pham_random.id}}'">
+                                Xem sản phẩm
                                 <span><i class="fas fa-shopping-cart"></i></span>
                             </button>
                         </div>
@@ -256,17 +254,24 @@
                                 <span><i class="fas fa-star"></i></span>
                             </div>
                         </div>
-                        <a href="#" class="product-name">Giày Thể Thao Còn Gì Dùng Nấy HS002M</a>
-                        <p class="product-price">875000 vnđ</p>
-                        <p class="product-price">780000 vnđ</p>
+                        <a href="#" class="product-name">{{san_pham_random.ten}}</a>
+                        <div class="product- price-container">
+                            {% if san_pham_random.khuyen_mai == True %}
+                            <strike class="product-price">{{san_pham_random.gia}}</strike>
+                            <p class="product-price">{{ san_pham_random.gia_km}} đ</p>
+                            {% else %}
+                            <p class="product-price">{{san_pham_random.gia}} đ</p>
+                            {% endif %}
+                        </div>
                     </div>
-
+                    {% if san_pham_random.khuyen_mai == True %}
                     <div class="off-info">
                         <h2 class="sm-title">Giảm 10%</h2>
                     </div>
+                    {% endif %}
                 </div>
                 <!-- end of single product -->
-                <!-- single product -->
+                {% endfor %}
 
             </div>
         </div>
@@ -331,46 +336,43 @@
         });
     });
 </script>
-<!-- Begin Ajax của mua ngay (nó cũng y chang cái thêm vào giỏ hàng thôi. nhưng mà nếu nhấn mua ngay thì nó sẽ chuyển đến trang giỏ hàng luôn)  -->
-{% endblock product-detail %}
+<!-- End Ajax của mua ngay (nó cũng y chang cái thêm vào giỏ hàng thôi. nhưng mà nếu nhấn mua ngay thì nó sẽ chuyển đến trang giỏ hàng luôn)  -->
 
 
-
-
-
-
-
-<!-- JS  -->
+<!-- Begin Ajax của thêm vào giỏ hàng nhưng mà là của cái nút thêm vào giỏ hàng ở chõ Có thể bạn cũng quan tâm -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Get all the <td> elements with the class "price"
-    var priceCells = document.querySelectorAll('.price');
-
-    // Loop through each <td> element and append " VNĐ" to its content
-    priceCells.forEach(function (priceCell) {
-        var price = priceCell.textContent;
-        priceCell.textContent = price + ' VNĐ';
-    });
-
-
-    document.querySelectorAll('.quantity').forEach(function (quantityDiv) {
-        var minusButton = quantityDiv.querySelector('.minus');
-        var plusButton = quantityDiv.querySelector('.plus');
-        var quantityInput = quantityDiv.querySelector('input[type="number"]');
-
-        // Decrease quantity
-        minusButton.addEventListener('click', function () {
-            var currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        // Increase quantity
-        plusButton.addEventListener('click', function () {
-            var currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
+    $(document).ready(function () {
+        $('.btn-cart').click(function () {
+            var san_pham_id = $(this).data('sanphamid');
+            var so_luong = 1;
+            $.ajax({
+                type: 'POST',
+                url: '{% url "them_vao_gio_hang" %}',
+                data: {
+                    'san_pham_id': san_pham_id,
+                    'so_luong': so_luong,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                    } else {
+                        alert('Đã xảy ra lỗi khi thêm vào giỏ hàng!');
+                    }
+                }
+            });
         });
     });
+</script>
+<!-- End Ajax của thêm vào giỏ hàng nhưng mà là của cái nút thêm vào giỏ hàng ở chõ Có thể bạn cũng quan tâm -->
+
+
+
+
+<!-- JS xử lý zoom hình và thay đổi hình  -->
+<script>
 
     document.getElementById('size-chart-link').addEventListener('click', function (event) {
         event.preventDefault();
@@ -413,3 +415,5 @@
     }
 
 </script>
+
+{% endblock product-detail %}

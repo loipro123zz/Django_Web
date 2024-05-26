@@ -18,6 +18,10 @@ class SanPham(models.Model):
     khuyen_mai = models.BooleanField(default=False) 
     gia_km = models.IntegerField(blank=True, null=True)
     mo_ta = models.CharField(max_length=500, default='', blank=True)
+    hinh_phu_1 = models.ImageField(null=True, blank=True)
+    hinh_phu_2 = models.ImageField(null=True, blank=True)
+    hinh_phu_3 = models.ImageField(null=True, blank=True) 
+    hinh_phu_4 = models.ImageField(null=True, blank=True)
     
     
     def __str__(self):
