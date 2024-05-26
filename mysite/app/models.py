@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 
@@ -48,7 +47,7 @@ class MucGioHang(models.Model):
     gio_hang = models.ForeignKey(GioHang, on_delete=models.SET_NULL, blank=True, null=True)
     so_luong = models.IntegerField(default=0, null=True, blank=True)
     ngay_them = models.DateTimeField(auto_now_add=True)
-    kich_thuoc = models.IntegerField(max_length=10, default=37)
+    kich_thuoc = models.IntegerField(default=37)
     
     def tinh_tong_gia_cua_tung_muc(self):
         if self.san_pham.gia_km: 
@@ -74,3 +73,23 @@ class DiaChiGiaoHang(models.Model):
     ten_nguoi_nhan = models.CharField(max_length=300, null=True)
     def __str__(self):
         return str(self.dia_chi)
+
+class Profile(models.Model):
+    khach_hang = models.OneToOneField(User, on_delete=models.CASCADE)
+    ho_ten = models.CharField(max_length=300, null=True, blank=True)
+    ngay_sinh = models.DateField(null=True, blank=True)
+    sdt = models.CharField(max_length=20, blank=True, null=True)
+    hinh = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.khach_hang)
+    
+    @property
+    def ImageURL(self):
+        try:
+            url = self.hinh.url
+        except:
+            url = '/static/images/user-avatar.png'
+        return url
+    
+   

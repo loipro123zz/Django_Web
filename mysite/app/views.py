@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -250,10 +250,47 @@ def search(request):
 
 # Hiển thị trang user profile của người dùng
 def user_profile(request):
+    profile, created = Profile.objects.get_or_create(khach_hang=request.user)
+    if request.method == 'POST':
+        # Phần này là làm về cập nhật thông tin user
+        hinh = request.FILES.get('hinh')
+        ho_ten = request.POST.get('ho-ten')
+        sdt = request.POST.get('sdt')
+        ngay_sinh = request.POST.get('ngay-sinh')
 
+        if hinh == None:
+            hinh = profile.hinh
 
+        profile.hinh = hinh 
+        profile.ho_ten = ho_ten
+        profile.sdt = sdt
+
+        if ngay_sinh:
+            profile.ngay_sinh = ngay_sinh
+        
+        profile.save()
+        
+        # Phần này là làm về thay đổi password 
+        current_password = request.POST.get('current-password')
+        new_password = request.POST.get('new-password')
+        repeat_new_password = request.POST.get('repeat-new-password')
+        username = request.user.username
+
+        user = authenticate(request, username=username, password=current_password)
+        if user is not None: 
+            if new_password == repeat_new_password:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Thay đổi mật khẩu thành công')
+                return redirect('login_user')
+            else: 
+                messages.error(request, 'Mật khẩu xác thực mật khẩu mới không giống!!!')
+                return redirect('user_profile')
+        else:
+            messages.error(request, 'Mật khẩu hiện tại không đúng !!!')
+            return redirect('user_profile') 
     context = {
-
+        'profile' : profile
     }
     return render(request, 'app/user-profile.html', context)
 

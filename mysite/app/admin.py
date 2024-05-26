@@ -7,3 +7,5 @@ admin.site.register(SanPham)
 admin.site.register(GioHang)
 admin.site.register(MucGioHang)
 admin.site.register(DiaChiGiaoHang)
+admin.site.register(Profile)
+
