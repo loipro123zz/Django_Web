@@ -5,10 +5,10 @@
 <div class="checkout">
     <div class="checkout-section">
         <div class="logo">
-            <img src="bitis-logo.png" alt="Biti's Logo">
+            <img src="logo.png" alt="Biti's Logo">
         </div>
         <div class="breadcrumb">
-            <a href="#">Giỏ hàng</a> &gt; <a href="#">Thông tin giao hàng</a>
+            <a href="{% url 'cart' %}">Giỏ hàng</a> &gt; <a href="#">Thông tin giao hàng</a>
         </div>
         <h2>Thông tin giao hàng</h2>
         <form method="post" action="{% url 'checkout' %}">

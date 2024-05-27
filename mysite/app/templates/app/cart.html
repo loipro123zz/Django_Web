@@ -75,10 +75,12 @@
         {% endif %}
     </table>
 </div>
-
-<div>
-    <button><a href="{% url 'checkout' %}">Chuyển sang trang</a></button>
+{% if muc_gio_hang %}
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary" type="button" onclick="window.location.href='/checkout'">Đặt Hàng</button>
 </div>
+{% endif %}
+
 <!-- Begin Ajax để thực hiện cập nhật các mục giỏ hàng -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
