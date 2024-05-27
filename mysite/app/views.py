@@ -253,6 +253,7 @@ def search(request):
 
 # Hiển thị trang user profile của người dùng
 def user_profile(request):
+    theloai_list = TheLoai.objects.all()
     profile, created = Profile.objects.get_or_create(khach_hang=request.user)
     if request.method == 'POST':
         # Phần này là làm về cập nhật thông tin user
@@ -291,16 +292,19 @@ def user_profile(request):
         else:
             return redirect('user_profile') 
     context = {
-        'profile' : profile
+        'profile' : profile,
+        'theloai_list' : theloai_list,
     }
     return render(request, 'app/user-profile.html', context)
 
 
 # Hiển thị trang Đơn Hàng 
 def donhang(request):
-    gio_hang_nguoi_dung = GioHang.objects.filter(khach_hang=request.user)
+    theloai_list = TheLoai .objects.all()
+    gio_hang_nguoi_dung = GioHang.objects.filter(khach_hang=request.user, hoan_thanh = True)
     context = {     
         'gio_hang_nguoi_dung' : gio_hang_nguoi_dung,
+        'theloai_list' : theloai_list,
     }
 
     return render(request, 'app/donhang.html', context)
