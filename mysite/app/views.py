@@ -309,5 +309,8 @@ def donhang(request):
 
     return render(request, 'app/donhang.html', context)
 
+# Hiển thị trang about (Giới thiệu)
+def about(request):
+    return render(request, 'app/about.html')
                 
 

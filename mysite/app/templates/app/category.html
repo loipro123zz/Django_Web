@@ -1,34 +1,93 @@
 {% extends 'app/base.html' %}
 
 {% block category %}
+<style>
+    .category {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 
+    .category h4 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        /* Chuyển đổi văn bản thành chữ in hoa */
+    }
+
+    .category p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .category .filter {
+        margin-top: 10px;
+    }
+
+    .category .filter label {
+        font-size: 14px;
+        color: #333;
+        margin-right: 10px;
+    }
+
+    .category .filter select {
+        padding: 5px;
+        font-size: 14px;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    .category .filter button {
+        padding: 5px 10px;
+        font-size: 14px;
+        color: #fff;
+        background-color: #007bff;
+        /* Màu xanh dương */
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .category hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin-top: 15px;
+    }
+</style>
 <!-- Begin Categories Content -->
 <div class="container-pdt" style="padding-top: 150px; ">
     <div class="row">
 
         <!-- Begin Main Content -->
 
-        <h4>{{theloai.ten}}</h4>
-        <p>
-            Tổng số sản phẩm: {{sanpham_list|length}}
-        </p>
-        <hr>
-        <!-- Begin Filter -->
-        <div>
-            <form action="" method="get">
-                <label for="sort-by">Sắp xếp theo</label>
-                <select name="sort-by" id="sort-by">
-                    <option value="all">Tất cả sản phẩm</option>
-                    <option value="tang">Giá: Tăng dần</option>
-                    <option value="giam">Giá: Giảm dần</option>
-                    <option value="a-z">Tên: A-Z</option>
-                    <option value="z-a">Tên: Z-A</option>
-                </select>
+        <div class="category" style="padding-left: 50px;">
+            <h3>{{theloai.ten}}</h3>
+            <p>Tổng số sản phẩm: {{sanpham_list|length}}</p>
+            <hr>
 
-                <button type="submit">Lọc</button>
-            </form>
+            <!-- Bắt đầu Bộ Lọc -->
+            <div class="filter">
+                <form action="" method="get">
+                    <label for="sort-by">Sắp xếp theo</label>
+                    <select name="sort-by" id="sort-by">
+                        <option value="all">Tất cả sản phẩm</option>
+                        <option value="tang">Giá: Tăng dần</option>
+                        <option value="giam">Giá: Giảm dần</option>
+                        <option value="a-z">Tên: A-Z</option>
+                        <option value="z-a">Tên: Z-A</option>
+                    </select>
+
+                    <button type="submit">Lọc</button>
+                </form>
+            </div>
+            <!-- Kết thúc Bộ Lọc -->
         </div>
-        <!-- End Filter -->
+
         <!-- Begin Products -->
         <section class="products">
             <div class="product-card-container">

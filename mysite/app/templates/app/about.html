@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Example</title>
+    <style>
+        header {
+            background-color: #F7ECD3;
+            padding: 50px 0;
+            border-bottom: 2px solid #ccc;
+            position: relative;
+            ;
+        }
+
+        .about-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .about-nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        .about-nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .about-nav ul li a:hover {
+            color: #007BFF;
+        }
+
+        .about-section {
+            padding: 50px 60px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .about-section h1 {
+            margin-top: 0;
+        }
+
+        .about-logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+
+        .blog-posts {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .post {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            width: 30%;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-content p {
+            margin: 0;
+            color: #eba48f;
+            font-size: 14px;
+        }
+
+        .post-content h2 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .post-content a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img class="about-logo" src="{% static 'images/logo.png'%}" alt="" onclick="window.location.href='/'">
+        <nav class="about-nav">
+            <ul>
+                <li><a href="#history">LỊCH SỬ</a></li>
+                <li><a href="#productss">SẢN PHẨM</a></li>
+                <li><a href="#people">CON NGƯỜI</a></li>
+                <li><a href="#achievements">THÀNH TỰU</a></li>
+                <li><a href="#news">TIN TỨC</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="about-section" id="history">
+        <img style="width:100%" src="{% static 'images/about3.webp'%}" alt="">
+        <img style="width:100%; padding:40px 0px 40px 0px" src=" {% static 'images/history.webp' %}" alt="">
+        <img style="width:100%" src="{% static 'images/about2.webp'%}" alt="">
+    </section>
+    <section class="about-section" id="products">
+        <div style="text-align: center;">
+            <img style="width:32%" src="{% static 'images/product1.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product2.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product3.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product4.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product5.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product6.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product7.webpp' %}" alt="">
+            <img style="width:32%" src="{% static 'images/product8.webpp' %}" alt="">
+
+
+        </div>
+
+    </section>
+    <section class="about-section" id="people">
+        <img style="width:100%" src="{% static 'images/human.webp' %}" alt="">
+        <img style="width:100%" src="{% static 'images/human2.webp' %}" alt="">
+    </section>
+    <section class="about-section" id="achievements">
+        <img style="width:100%" src="{% static 'images/achievement.webp' %}" alt="">
+        <img style="width:100%" src="{% static 'images/achievement1.webp' %}" alt="">
+        <img style="width:100%" src="{% static 'images/achievement2.webp' %}" alt="">
+    </section>
+    <section class="about-section" id="news">
+        <h1>Tin Tức</h1>
+        <div class="blog-posts">
+            <div class="post">
+                <img src="{% static 'images/news2.webp' %}" alt="Blog post 1">
+                <div class="post-content">
+                    <p>18 tháng 4</p>
+                    <h2>HỘI NGHỊ KHÁCH HÀNG TOÀN QUỐC 2024 CÙNG BITI’S VỚI “HÀNH TRÌNH CỦA THANH XUÂN</h2>
+                    <p>Vào ngày 18/03 - 21/03 vừa qua, Biti’s tổ chức Hội nghị khách hàng toàn quốc 2024 với chủ đề
+                        “Hành trình của THANH XUÂN” tại Lady Hill Sapa Resort...</p>
+                    <a href="#">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="post">
+                <img src="{% static 'images/news2.webp' %}" alt="Blog post 2">
+                <div class="post-content">
+                    <p>25 tháng 5</p>
+                    <h2>THÁNG HẠNH PHÚC 2024 - KHI NHỮNG ĐIỀU TÍCH CỰC LAN TOẢ KHẮP CỘNG ĐỒNG BITI'S</h2>
+                    <p>Tháng Hạnh phúc 2024 cùng thông điệp “Những điều tích cực" đã chính thức khởi động năm thứ 6 của
+                        hành trình hạnh phúc tại Biti's...</p>
+                    <a href="#">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="post">
+                <img src="{% static 'images/news2.webp' %}" alt="Blog post 3">
+                <div class="post-content">
+                    <p>26 tháng 5</p>
+                    <h2>Thể lệ chương trình "Cào liền tay - Mở quà hạnh phúc</h2>
+                    <p> Đại hạ giá tất cả sản phẩm giày, dép, balo, túi xách và phụ kiện của Biti’s đang kinh doanh tại
+                        các siêu thị Aeon. ...</p>
+                    <a href="#">Đọc Thêm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

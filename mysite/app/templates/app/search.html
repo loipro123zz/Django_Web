@@ -1,6 +1,45 @@
 {% extends 'app/base.html' %}
 
 {% block search %}
+<style>
+    .search-result {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .search-result h4 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        /* Chuyển đổi văn bản thành chữ in hoa */
+    }
+
+    .search-result p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .search-result .query {
+        color: #ff5733;
+        /* Màu cam */
+    }
+
+    .search-result .product-count {
+        color: #4CAF50;
+        /* Màu xanh lá cây */
+    }
+
+    .search-result hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin-top: 15px;
+    }
+</style>
 <!-- Begin Search Content -->
 <div class="container-pdt" style="padding-top: 130px; ">
     <div class="row">
@@ -12,11 +51,12 @@
 
         <!-- Begin Main Content -->
 
-        <h4>Kết quả tìm kiếm: {{query}} </h4>
-        <p>
-            Tổng số sản phẩm: {{san_pham_tim_kiem_list|length}}
-        </p>
-        <hr>
+        <div class="search-result" style="padding-left: 50px;">
+            <h3>Kết quả tìm kiếm: <span>{{query}}</span></h3>
+            <p>Tổng số sản phẩm: <span>{{san_pham_tim_kiem_list|length}}</span></p>
+            <hr>
+        </div>
+
 
         <!-- Begin Products -->
         <section class="products">

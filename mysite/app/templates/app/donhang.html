@@ -67,6 +67,10 @@
         <h2>Đơn Hàng #ABC{{gio_hang.id}}</h2>
         <p><strong>Ngày đặt hàng:</strong> {{gio_hang.ngay_dat}}</p>
         <p><strong>Trạng thái:</strong> Đang xử lý</p>
+        <p><strong>Địa chỉ giao hàng:</strong> {{ gio_hang.diachigiaohang_set.first.dia_chi }}</p>
+        <p><strong>Số điện thoại người nhận:</strong> {{ gio_hang.diachigiaohang_set.first.sdt }}</p>
+        <p><strong>Email người nhận:</strong> {{ gio_hang.diachigiaohang_set.first.email }}</p>
+        <p><strong>Tên người nhận:</strong> {{ gio_hang.diachigiaohang_set.first.ten_nguoi_nhan }}</p>
 
         <div class="order-items">
             <h3>Sản phẩm</h3>
